@@ -1,0 +1,27 @@
+<div class="auth-card">
+  <!-- Header -->
+  <div class="auth-card-header">
+    <div class="auth-logo">
+      <div class="logo-icon">
+        <span>FM</span>
+      </div>
+      <div class="logo-text">
+        <h2 class="logo-title">FM PROMOTIONS</h2>
+        <p class="logo-subtitle">Branded Merchandise Specialist</p>
+      </div>
+    </div>
+    
+    <h3 class="auth-title">{{ title }}</h3>
+    <p class="auth-subtitle">{{ subtitle }}</p>
+  </div>
+
+  <!-- Content Slot -->
+  <div class="auth-card-content">
+    <ng-content></ng-content>
+  </div>
+
+  <!-- Footer -->
+  <div class="auth-card-footer">
+    <ng-content select="[footer]"></ng-content>
+  </div>
+</div>
