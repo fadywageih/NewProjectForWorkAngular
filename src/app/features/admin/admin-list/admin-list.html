@@ -1,0 +1,34 @@
+<div class="admin-list-container">
+  <div class="admin-list-header">
+    <h2>Admin Management</h2>
+    <a routerLink="/admin/register" class="btn btn-primary">Add New Admin</a>
+  </div>
+  <div *ngIf="loading" class="loading-spinner">
+    Loading admins...
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!loading && !errorMessage" class="admin-table-container">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Last Login</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let admin of admins">
+          <td>{{ admin.fullName }}</td>
+          <td>{{ admin.email }}</td>
+          <td>{{ admin.lastLogin ? (admin.lastLogin | date:'medium') : 'Never' }}</td>
+          <td>{{ admin.createdAt | date:'medium' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

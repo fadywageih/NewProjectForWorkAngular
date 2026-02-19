@@ -1,0 +1,24 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="auth-form">
+  <!-- Error Messages -->
+  @if (errorMessages.length > 0) {
+    <div class="error-messages">
+      @for (error of errorMessages; track error) {
+        <div class="error-message">{{ error }}</div>
+      }
+    </div>
+  }
+  <div class="form-fields">
+    <ng-content></ng-content>
+  </div>
+
+  <button 
+    type="submit" 
+    [disabled]="isLoading || formGroup.invalid"
+    class="submit-button">
+    
+    @if (isLoading) {
+      <span class="loading-spinner"></span>
+    }
+    <span>Submit</span>
+  </button>
+</form>

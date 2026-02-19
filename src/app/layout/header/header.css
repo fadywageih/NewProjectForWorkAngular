@@ -1,0 +1,25 @@
+/* Custom styles for header */
+.sticky-header {
+  backdrop-filter: blur(10px);
+  background-color: rgba(15, 32, 75, 0.95);
+}
+
+.user-dropdown {
+  transition: all 0.3s ease;
+}
+
+.user-dropdown:hover .dropdown-content {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

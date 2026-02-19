@@ -1,0 +1,132 @@
+<header class="bg-[#0f204b] text-white py-4 px-6 shadow-lg sticky top-0 z-50">
+  <div class="container mx-auto flex justify-between items-center">
+    <!-- Logo -->
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+        <span class="font-bold text-lg">FM</span>
+      </div>
+      <div>
+        <h1 class="text-xl font-bold">FM PROMOTIONS</h1>
+        <p class="text-xs text-gray-300">Branded Merchandise Specialist Since 1999</p>
+      </div>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex space-x-8 items-center">
+      <a routerLink="/" class="hover:text-yellow-300 transition">Home</a>
+      <a href="#" class="hover:text-yellow-300 transition">Products</a>
+      <a href="#" class="hover:text-yellow-300 transition">Contact</a>
+      <a href="#" class="hover:text-yellow-300 transition">Feedback</a>
+
+      <!-- Dynamic Auth Button -->
+      @if (isLoggedIn) {
+        <!-- User Dropdown Menu -->
+        <div class="relative group">
+          <button class="flex items-center space-x-2 hover:text-yellow-300 transition">
+            <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
+              <span class="font-bold text-sm">{{ userInitial }}</span>
+            </div>
+            <span>{{ userName }}</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          
+          <!-- Dropdown Content -->
+          <div class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg py-2 hidden group-hover:block">
+            <div class="px-4 py-2 border-b">
+              <p class="font-semibold">{{ userName }}</p>
+              <p class="text-xs text-gray-500 truncate">{{ userEmail }}</p>
+            </div>
+            <a routerLink="/dashboard" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+            <a routerLink="/profile" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+            <div class="border-t mt-2 pt-2">
+              <button (click)="logout()" 
+                      class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 hover:text-red-700">
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      } @else {
+        <!-- Login Button -->
+        <a routerLink="/login" 
+           class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded-lg font-semibold transition">
+          Login
+        </a>
+      }
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden text-2xl" (click)="toggleMenu()">
+      {{ isMenuOpen ? '✕' : '☰' }}
+    </button>
+  </div>
+  @if (isMenuOpen) {
+    <div class="md:hidden">
+      <div class="container mx-auto py-4 px-6 bg-[#0f204b] border-t border-white/10">
+        <div class="flex flex-col space-y-4">
+          <a routerLink="/" 
+             class="hover:text-yellow-300 transition py-2" 
+             (click)="closeMenu()">
+            Home
+          </a>
+          <a href="#" 
+             class="hover:text-yellow-300 transition py-2" 
+             (click)="closeMenu()">
+            Products
+          </a>
+          <a href="#" 
+             class="hover:text-yellow-300 transition py-2" 
+             (click)="closeMenu()">
+            Contact
+          </a>
+          <a href="#" 
+             class="hover:text-yellow-300 transition py-2" 
+             (click)="closeMenu()">
+            Feedback
+          </a>
+          
+          <div class="pt-4 border-t border-white/10">
+            @if (isLoggedIn) {
+              <div class="space-y-3">
+                <div class="flex items-center space-x-3 px-2">
+                  <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+                    <span class="font-bold">{{ userInitial }}</span>
+                  </div>
+                  <div>
+                    <p class="font-semibold">{{ userName }}</p>
+                    <p class="text-xs text-gray-300">{{ userEmail }}</p>
+                  </div>
+                </div>
+                
+                <!-- User Links -->
+                <a routerLink="/dashboard" 
+                   class="block px-4 py-2 hover:bg-white/10 rounded transition"
+                   (click)="closeMenu()">
+                  Dashboard
+                </a>
+                <a routerLink="/profile" 
+                   class="block px-4 py-2 hover:bg-white/10 rounded transition"
+                   (click)="closeMenu()">
+                  Profile
+                </a>
+                <button (click)="logout()" 
+                        class="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition">
+                  Logout
+                </button>
+              </div>
+            } @else {
+              <a routerLink="/login" 
+                 class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded-lg font-semibold transition block text-center"
+                 (click)="closeMenu()">
+                Login
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</header>
