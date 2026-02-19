@@ -5,23 +5,19 @@ export interface User {
   address?: string;
   phone?: string;
 }
-
 export interface ApplicationUser extends User {
   userName?: string;
   email: string;
   name?: string;
   phoneNumber?: string;
 }
-
 export interface UserWithAddress extends User {
   address: string;
 }
-
 export interface LoginRequest {
   email: string;
   password: string;
 }
-
 export interface RegisterRequest {
   name: string;
   email: string;
@@ -30,18 +26,14 @@ export interface RegisterRequest {
   address: string;
   phone: string;
 }
-
 export interface UserResult {
   displayName: string;
   email: string;
   token: string;
 }
-
 export interface ForgetPasswordRequest {
   email: string;
 }
-
-// Request from UI (contains URL-encoded token)
 export interface ResetPasswordRequest {
   email: string;
   token: string; // URL-encoded token from link

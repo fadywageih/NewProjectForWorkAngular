@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-
 export interface TokenData {
   token: string;
   expiresAt: number;
   email: string;
 }
-
 @Injectable({
   providedIn: 'root'
 })

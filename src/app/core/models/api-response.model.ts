@@ -4,12 +4,10 @@ export interface ApiResponse<T> {
   message?: string;
   errors?: string[];
 }
-
 export interface ValidationError {
   field: string;
   errors: string[];
 }
-
 export interface ValidationErrorResponse {
   statusCode: number;
   errorMessage: string;

@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs';
-import { LoginRequest, RegisterRequest, UserResult, ForgetPasswordRequest, ResetPasswordRequest } from '../models/user.model';
+import { Observable } from "rxjs";
+import { LoginRequest, UserResult, RegisterRequest, ResetPasswordRequest } from "../models/user.model";
 
 export interface IAuthenticationService {
   login(loginData: LoginRequest): Observable<UserResult>;

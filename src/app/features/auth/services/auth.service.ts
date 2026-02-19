@@ -19,19 +19,13 @@ export class AuthService {
   private readonly USER_KEY = 'currentUser';
   private readonly REMEMBER_KEY = 'rememberMe';
   private readonly REMEMBERED_EMAIL_KEY = 'rememberedEmail';
-  
-  // BehaviorSubject لتتبع حالة المصادقة ديناميكياً
   private authStatusSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
   private userSubject = new BehaviorSubject<User | null>(this.getCurrentUser());
 
   constructor(private apiService: ApiService) {}
-
-  // Observable يمكن الاشتراك فيه لمتابعة حالة المصادقة
   getAuthStatus(): Observable<boolean> {
     return this.authStatusSubject.asObservable();
   }
-
-  // Observable يمكن الاشتراك فيه لمتابعة بيانات المستخدم
   getUser(): Observable<User | null> {
     return this.userSubject.asObservable();
   }
@@ -40,16 +34,13 @@ export class AuthService {
     return this.apiService.post<UserResult>('Authentication/login', loginData).pipe(
       tap(response => console.log('✅ Login response:', response)),
       map(response => {
-        // تحويل UserResult إلى User لحفظه محلياً
         const userToStore: User = {
-          id: undefined, // سيرسلها الباك إند
+          id: undefined,
           email: response.email,
           name: response.displayName
         };
         
         this.storeUserData(userToStore, response.token, rememberMe);
-        
-        // تحديث BehaviorSubjects
         this.authStatusSubject.next(true);
         this.userSubject.next(userToStore);
         
@@ -66,16 +57,13 @@ export class AuthService {
     return this.apiService.post<UserResult>('Authentication/register', registerData).pipe(
       tap(response => console.log('✅ Register response:', response)),
       map(response => {
-        // تحويل UserResult إلى User لحفظه محلياً
         const userToStore: User = {
           id: undefined,
           email: response.email,
           name: response.displayName
         };
         
-        this.storeUserData(userToStore, response.token, false); // Default no remember me for registration
-        
-        // تحديث BehaviorSubjects
+        this.storeUserData(userToStore, response.token, false); 
         this.authStatusSubject.next(true);
         this.userSubject.next(userToStore);
         
@@ -130,15 +118,12 @@ export class AuthService {
   }
 
   logout(): void {
-    // مسح كل التخزين
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
     localStorage.removeItem(this.REMEMBER_KEY);
     localStorage.removeItem(this.REMEMBERED_EMAIL_KEY);
     sessionStorage.removeItem(this.TOKEN_KEY);
     sessionStorage.removeItem(this.USER_KEY);
-    
-    // تحديث BehaviorSubjects
     this.authStatusSubject.next(false);
     this.userSubject.next(null);
   }
@@ -153,15 +138,12 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    // البحث في كلا المكانين
     return localStorage.getItem(this.TOKEN_KEY) || sessionStorage.getItem(this.TOKEN_KEY);
   }
 
   getRememberMe(): boolean {
     return localStorage.getItem(this.REMEMBER_KEY) === 'true';
   }
-
-  // دالة لتخزين البريد الإلكتروني لخاصية Remember Me
   storeRememberedEmail(email: string): void {
     localStorage.setItem(this.REMEMBERED_EMAIL_KEY, email);
   }
@@ -173,36 +155,25 @@ export class AuthService {
   clearRememberedEmail(): void {
     localStorage.removeItem(this.REMEMBERED_EMAIL_KEY);
   }
-
-  // تحديث بيانات المستخدم (مثل الاسم أو الصورة)
   updateUserData(updatedUser: Partial<User>): void {
     const currentUser = this.getCurrentUser();
     if (currentUser) {
       const newUser = { ...currentUser, ...updatedUser };
-      
-      // تحديث التخزين
       if (this.getRememberMe()) {
         localStorage.setItem(this.USER_KEY, JSON.stringify(newUser));
       } else {
         sessionStorage.setItem(this.USER_KEY, JSON.stringify(newUser));
       }
-      
-      // تحديث BehaviorSubject
       this.userSubject.next(newUser);
     }
   }
 
-  // التحقق من صلاحية التوكن (يمكن إضافة مزيد من المنطق هنا)
   isTokenValid(): boolean {
     const token = this.getToken();
     if (!token) return false;
-    
-    // يمكن إضافة منطق للتحقق من صلاحية التوكن
-    // مثلاً التحقق من تاريخ الانتهاء إذا كان JWT
     return true;
   }
 
-  // إعادة تحميل بيانات المستخدم من السيرفر
   refreshUserData(): Observable<User> {
     const currentUser = this.getCurrentUser();
     if (!currentUser || !currentUser.email) {

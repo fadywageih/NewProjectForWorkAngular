@@ -1,4 +1,3 @@
-/* =========== PRIMARY BANNER =========== */
 .primary-banner {
   background: linear-gradient(to right, #1e3a8a, #1d4ed8);
   overflow: hidden;
@@ -8,8 +7,6 @@
   display: flex;
   align-items: center;
 }
-
-/* =========== SECONDARY BANNER =========== */
 .secondary-banner {
   background: linear-gradient(to right, #fbbf24, #f97316);
   overflow: hidden;
@@ -19,8 +16,6 @@
   display: flex;
   align-items: center;
 }
-
-/* =========== MARQUEE ANIMATIONS =========== */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -79,7 +74,6 @@
   margin-right: 2rem;
 }
 
-/* =========== HERO SECTION =========== */
 .hero-section {
   padding: 3rem 1.5rem;
 }
@@ -426,8 +420,6 @@
 .feature-link:hover {
   color: #0f204b;
 }
-
-/* About Highlight Enhanced */
 .about-highlight-enhanced {
   background: white;
   border-radius: 2rem;

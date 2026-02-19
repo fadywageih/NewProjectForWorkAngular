@@ -1,0 +1,170 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4 relative overflow-hidden">
+  <div class="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#1e2c4f] to-[#2a3c64] text-white py-2 overflow-hidden">
+    <div class="animate-marquee whitespace-nowrap">
+      <span class="mx-4">🔥 Wholesale E-Commerce Website 🔥</span>
+      <span class="mx-4 text-yellow-300">Premium Branded Merchandise</span>
+      <span class="mx-4">Custom Printing Services</span>
+      <span class="mx-4 text-yellow-300">Bulk Orders Welcome</span>
+      <span class="mx-4">Worldwide Shipping Available</span>
+      <span class="mx-4">🔥 Wholesale E-Commerce Website 🔥</span>
+    </div>
+  </div>
+  <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 relative z-10">
+    <div class="text-center mb-8">
+      <div class="inline-block p-3 bg-gradient-to-r from-[#1e2c4f] to-[#2a3c64] rounded-full mb-4">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+        </svg>
+      </div>
+      <h2 class="text-3xl font-bold bg-gradient-to-r from-[#1e2c4f] to-[#2a3c64] bg-clip-text text-transparent">
+        Admin Login
+      </h2>
+      <p class="text-gray-600 mt-2">Access the administration panel</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div class="space-y-2">
+        <label for="email" class="block text-sm font-semibold text-gray-700">
+          Email Address
+        </label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m0 0l4-4m-4 4l4 4m8-4a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <input
+            type="email"
+            id="email"
+            formControlName="email"
+            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1e2c4f] focus:border-[#1e2c4f] transition-colors"
+            [class.border-red-500]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+            placeholder="Enter your email"
+          />
+        </div>
+        <!-- Error Messages -->
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-sm text-red-600 space-y-1">
+          <div *ngIf="loginForm.get('email')?.errors?.['required']" class="flex items-center">
+            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+            </svg>
+            Email is required
+          </div>
+          <div *ngIf="loginForm.get('email')?.errors?.['email']" class="flex items-center">
+            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+            </svg>
+            Please enter a valid email
+          </div>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="space-y-2">
+        <label for="password" class="block text-sm font-semibold text-gray-700">
+          Password
+        </label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#1e2c4f] focus:border-[#1e2c4f] transition-colors"
+            [class.border-red-500]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+            placeholder="Enter your password"
+          />
+        </div>
+        <!-- Error Messages -->
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-sm text-red-600 space-y-1">
+          <div *ngIf="loginForm.get('password')?.errors?.['required']" class="flex items-center">
+            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+            </svg>
+            Password is required
+          </div>
+          <div *ngIf="loginForm.get('password')?.errors?.['minlength']" class="flex items-center">
+            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+            </svg>
+            Password must be at least 6 characters
+          </div>
+        </div>
+        
+        <!-- Forgot Password -->
+        <div class="flex justify-end">
+          <a href="#" class="text-sm text-[#1e2c4f] hover:text-[#2a3c64] font-medium transition-colors">
+            Forgot password?
+          </a>
+        </div>
+      </div>
+
+      <!-- Error Alert -->
+      <div *ngIf="errorMessage" class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-red-700">{{ errorMessage }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button 
+        type="submit" 
+        class="w-full bg-gradient-to-r from-[#1e2c4f] to-[#2a3c64] hover:from-[#2a3c64] hover:to-[#1e2c4f] text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center"
+        [disabled]="loginForm.invalid || loading"
+      >
+        <span *ngIf="loading" class="flex items-center">
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Logging in...
+        </span>
+        <span *ngIf="!loading" class="flex items-center">
+          Login
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+          </svg>
+        </span>
+      </button>
+    </form>
+
+    <!-- Footer Links -->
+    <div class="mt-8 space-y-3 text-center border-t pt-6">
+      <p class="text-sm text-gray-600">
+        Don't have admin access? 
+        <a routerLink="/admin/register" class="text-[#1e2c4f] hover:text-[#2a3c64] font-semibold transition-colors">
+          Request access
+        </a>
+      </p>
+      <p class="text-sm text-gray-500">
+        Return to 
+        <a routerLink="/" class="text-gray-700 hover:text-[#1e2c4f] font-medium transition-colors">
+          public site
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer Banner -->
+  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#1e2c4f] to-[#2a3c64] text-white py-2 overflow-hidden">
+    <div class="animate-marquee2 whitespace-nowrap">
+      <span class="mx-4">🚚 Free Shipping on Orders Over $500</span>
+      <span class="mx-4 text-yellow-300">⭐ 1000+ Satisfied Corporate Clients</span>
+      <span class="mx-4">⏰ 24-48 Hour Turnaround Available</span>
+      <span class="mx-4 text-yellow-300">🌍 Serving 50+ Countries Worldwide</span>
+      <span class="mx-4">💼 Custom Branding Solutions</span>
+      <span class="mx-4">🚚 Free Shipping on Orders Over $500</span>
+    </div>
+  </div>
+</div>

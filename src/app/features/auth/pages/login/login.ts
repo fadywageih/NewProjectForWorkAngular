@@ -54,10 +54,7 @@ export class Login implements OnInit {
       this.router.navigate(['/']);
     }
   }
-
-  // دالة مبسطة للضغط على Enter بدون مشاكل TypeScript
   handleKeyDown(event: any): void {
-    // أي نوع يصلنا، نحول إلى KeyboardEvent فقط إذا كان يحتوي على key
     if (event && event.key === 'Enter' && !this.isLoading && this.loginForm.valid) {
       event.preventDefault();
       this.onSubmit();
@@ -129,14 +126,9 @@ export class Login implements OnInit {
   private handleLoginError(error: any, email: string): void {
     const errorMsg = error.message?.toLowerCase() || '';
     const status = error.status;
-    
-    // مسح الرسائل القديمة
     this.emailErrorMessage = '';
     this.passwordErrorMessage = '';
-    
-    // معالجة الأخطاء حسب النوع
     if (status === 401) {
-      // Unauthorized - تحليل الرسالة
       if (errorMsg.includes('email') || errorMsg.includes('not found')) {
         this.handleEmailError('Email not found in our system');
       } else if (errorMsg.includes('password') || errorMsg.includes('incorrect')) {
@@ -145,21 +137,16 @@ export class Login implements OnInit {
         this.handlePasswordError('Invalid credentials. Please try again.');
       }
     } else if (status === 0) {
-      // مشكلة في الاتصال
       this.generalErrorMessage = 'Cannot connect to server. Please check your internet connection.';
     } else if (status === 400) {
-      // Bad request
       this.generalErrorMessage = 'Invalid request. Please check your input.';
     } else {
-      // أخطاء أخرى
       this.generalErrorMessage = this.getErrorMessage(error);
     }
   }
 
   private handleEmailError(message: string): void {
     this.emailErrorMessage = message;
-    
-    // التركيز على حقل الإيميل بعد فترة قصيرة
     setTimeout(() => {
       if (this.emailInput?.nativeElement) {
         this.emailInput.nativeElement.focus();
@@ -170,8 +157,6 @@ export class Login implements OnInit {
 
   private handlePasswordError(message: string): void {
     this.passwordErrorMessage = message;
-    
-    // التركيز على حقل الباسورد بعد فترة قصيرة
     setTimeout(() => {
       if (this.passwordInput?.nativeElement) {
         this.passwordInput.nativeElement.focus();
@@ -216,8 +201,6 @@ export class Login implements OnInit {
       return error.message || 'An unexpected error occurred. Please try again.';
     }
   }
-
-  // دالة لتحديث رسائل الخطأ عند تغيير المدخلات
   onInputChange(field: 'email' | 'password'): void {
     if (field === 'email' && this.emailErrorMessage) {
       this.emailErrorMessage = '';
@@ -225,8 +208,6 @@ export class Login implements OnInit {
     if (field === 'password' && this.passwordErrorMessage) {
       this.passwordErrorMessage = '';
     }
-    
-    // مسح الرسالة العامة إذا كان هناك كتابة
     if (this.generalErrorMessage) {
       this.generalErrorMessage = '';
     }
